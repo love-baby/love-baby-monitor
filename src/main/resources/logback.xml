@@ -3,7 +3,7 @@
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
     <property name="LOG_HOME" value="log"/>
     <!--定义日志名称-->
-    <property name="SERVER_NAME" value="love-baby-user"/>
+    <property name="SERVER_NAME" value="love-baby-monitor"/>
     <!-- 按照每天生成日志文件 -->
     <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <File>${LOG_HOME}/${SERVER_NAME}.log</File>
