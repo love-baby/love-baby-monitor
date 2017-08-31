@@ -52,7 +52,4 @@
         <appender-ref ref="ROLLING"/>
         <appender-ref ref="ERROR"/>
     </root>
-
-    <jmxConfigurator/>
-
 </configuration>
