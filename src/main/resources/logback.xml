@@ -53,7 +53,6 @@
         <appender-ref ref="ERROR"/>
     </root>
 
-    <include resource="org/springframework/boot/logging/logback/base.xml"/>
     <jmxConfigurator/>
 
 </configuration>
