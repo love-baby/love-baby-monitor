@@ -24,7 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable() //HTTP with Disable CSRF
-                .authorizeRequests() //Authorize Request Configuration
+                .authorizeRequests()
                 .antMatchers("/login",
                         "/api/**",
                         "/**/heapdump",
@@ -33,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/logfile",
                         "/**/flyway",
                         "/**/auditevents",
-                        "/**/jolokia").permitAll() //放开"/api/**"：为了给被监控端免登录注册并解决Log与Logger冲突
+                        "/**/jolokia").permitAll()
                 .and()
                 .authorizeRequests()
                 .antMatchers("/**").hasRole("USER")
