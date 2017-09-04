@@ -27,6 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable() //HTTP with Disable CSRF
                 .authorizeRequests() //Authorize Request Configuration
                 .antMatchers("/login",
+                        "/health/","/info/",
                         "/api/**",
                         "/**/heapdump",
                         "/**/loggers",
