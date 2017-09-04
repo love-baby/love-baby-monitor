@@ -25,20 +25,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable() //HTTP with Disable CSRF
                 .authorizeRequests()
-                .antMatchers("/login",
-                        "/api/**",
-                        "/**/heapdump",
-                        "/**/loggers",
-                        "/**/liquibase",
-                        "/**/logfile",
-                        "/**/flyway",
-                        "/**/auditevents",
-                        "/**/jolokia").permitAll()
+                .antMatchers("/login","/**/heapdump","/**/loggers","/**/liquibase","/**/logfile","/**/flyway","/**/auditevents","/**/jolokia").permitAll()
+                .antMatchers("/api/**").permitAll()
                 .and()
-                .authorizeRequests()
-                .antMatchers("/**").hasRole("USER")
-                .antMatchers("/**").authenticated()
-                .and() //Login Form configuration for all others
                 .formLogin()
                 .loginPage("/login.html")
                 .loginProcessingUrl("/login").permitAll()
