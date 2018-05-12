@@ -21,6 +21,11 @@
 
     <dependencies>
 
+        <!--注册服务-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>pring-cloud-starter-netflix-eureka-clinet</artifactId>
+        </dependency>
         <!--表示为web工程-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -44,11 +49,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-        <!--注册服务-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka</artifactId>
-        </dependency>
+
         <!--监控-->
         <dependency>
             <groupId>de.codecentric</groupId>
