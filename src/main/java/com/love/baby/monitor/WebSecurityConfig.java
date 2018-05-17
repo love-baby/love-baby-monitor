@@ -1,11 +1,12 @@
 package com.love.baby.monitor;
 
+import de.codecentric.boot.admin.server.config.AdminServerProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
 /**
  * 配置HTTPBASIC权限验证
@@ -15,28 +16,26 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true, proxyTargetClass = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        //忽略css.jq.img等文件
-        web.ignoring().antMatchers("/**.html", "/**.css", "/img/**", "/**.js", "/third-party/**");
+    private final String adminContextPath;
+
+    public WebSecurityConfig(AdminServerProperties adminServerProperties) {
+        this.adminContextPath = adminServerProperties.getContextPath();
     }
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable() //HTTP with Disable CSRF
-                .authorizeRequests()
-                .antMatchers("/login","/**/heapdump","/**/loggers","/**/liquibase","/**/logfile","/**/flyway","/**/auditevents","/**/jolokia").permitAll()
-                .antMatchers("/api/**").permitAll()
+        SavedRequestAwareAuthenticationSuccessHandler successHandler = new SavedRequestAwareAuthenticationSuccessHandler();
+        successHandler.setTargetUrlParameter("redirectTo");
+
+        http.authorizeRequests()
+                .antMatchers(adminContextPath + "/assets/**").permitAll()
+                .antMatchers(adminContextPath + "/login").permitAll()
+                .anyRequest().authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/login.html")
-                .loginProcessingUrl("/login").permitAll()
-                .defaultSuccessUrl("/")
-                .and() //Logout Form configuration
-                .logout()
-                .deleteCookies("remove")
-                .logoutSuccessUrl("/login.html").permitAll()
-                .and()
-                .httpBasic();
+                .formLogin().loginPage(adminContextPath + "/login").successHandler(successHandler).and()
+                .logout().logoutUrl(adminContextPath + "/logout").and()
+                .httpBasic().and()
+                .csrf().disable();
     }
 }
