@@ -1,7 +1,7 @@
 <configuration debug="true" scan="true" scanPeriod="30 seconds" packagingData="true">
 
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
-    <property resource="application.properties"/>
+    <property resource="bootstrap.properties"/>
     <property name="LOG_HOME" value="../logs"/>
     <!--定义日志名称-->
     <property name="SERVER_NAME" value="${spring.application.name}"/>
