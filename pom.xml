@@ -146,8 +146,7 @@
                     <useWildcardClassPath>true</useWildcardClassPath>
                     <programs>
                         <program>
-                            <id>start</id>
-                            <name>MonitorApplication</name>
+                            <name>start</name>
                             <!-- 启动类 -->
                             <mainClass>com.love.baby.monitor.MonitorApplication</mainClass>
                             <jvmSettings>
