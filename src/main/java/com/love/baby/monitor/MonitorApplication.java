@@ -14,11 +14,11 @@ import org.springframework.context.annotation.Configuration;
 /**
  * Created by liangbc on 2017/7/25.
  */
-@EnableDiscoveryClient
-@SpringBootApplication
 @Configuration
 @EnableAutoConfiguration
 @EnableAdminServer
+@EnableDiscoveryClient
+@SpringBootApplication
 public class MonitorApplication {
     public static void main(String[] args) {
         SpringApplication.run(MonitorApplication.class, args);
