@@ -127,60 +127,21 @@
 
             <!--生成启动脚本插件-->
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>appassembler-maven-plugin</artifactId>
-                <version>2.0.0</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
+                    <mainClass>com.love.baby.monitor.MonitorApplication</mainClass>
+                    <layout>JAR</layout>
+                </configuration>
                 <executions>
                     <execution>
-                        <id>Make Assembly</id>
-                        <phase>package</phase>
                         <goals>
-                            <goal>assemble</goal>
+                            <goal>repackage</goal>
+                            <goal>build-info</goal>
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <!-- 生成linux, windows两种平台的执行脚本 -->
-                    <binFileExtensions>
-                        <unix>.sh</unix>
-                    </binFileExtensions>
-                    <platforms>
-                        <platform>windows</platform>
-                        <platform>unix</platform>
-                    </platforms>
-                    <!-- 根目录 -->
-                    <assembleDirectory>${project.build.directory}/mall</assembleDirectory>
-                    <!-- 打包的jar，以及maven依赖的jar放到这个目录里面 -->
-                    <repositoryName>lib</repositoryName>
-                    <!-- 可执行脚本的目录 -->
-                    <binFolder>bin</binFolder>
-                    <!-- 配置文件的目标目录 -->
-                    <configurationDirectory>conf</configurationDirectory>
-                    <!-- 拷贝配置文件到上面的目录中 -->
-                    <copyConfigurationDirectory>true</copyConfigurationDirectory>
-                    <!-- 从哪里拷贝配置文件 (默认src/main/config) -->
-                    <configurationSourceDirectory>src/main/resources</configurationSourceDirectory>
-                    <!-- lib目录中jar的存放规则，默认是${groupId}/${artifactId}的目录格式，flat表示直接把jar放到lib目录 -->
-                    <repositoryLayout>flat</repositoryLayout>
-                    <encoding>UTF-8</encoding>
-                    <logsDirectory>logs</logsDirectory>
-                    <tempDirectory>tmp</tempDirectory>
-                    <extraJvmArguments>-Xms128m</extraJvmArguments>
-                    <showConsoleWindow>false</showConsoleWindow>
-                    <useWildcardClassPath>true</useWildcardClassPath>
-                    <programs>
-                        <program>
-                            <name>start</name>
-                            <!-- 启动类 -->
-                            <mainClass>com.love.baby.monitor.MonitorApplication</mainClass>
-                            <jvmSettings>
-                                <initialMemorySize>32m</initialMemorySize>
-                                <maxMemorySize>64m</maxMemorySize>
-                                <maxStackSize>128m</maxStackSize>
-                            </jvmSettings>
-                        </program>
-                    </programs>
-                </configuration>
             </plugin>
 
         </plugins>

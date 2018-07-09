@@ -2,7 +2,7 @@
 
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
     <property resource="bootstrap.properties"/>
-    <property name="LOG_HOME" value="../logs"/>
+    <property name="LOG_HOME" value="logs"/>
     <!--定义日志名称-->
     <property name="SERVER_NAME" value="${spring.application.name}"/>
     <!-- 按照每天生成日志文件 -->
